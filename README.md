@@ -19,6 +19,8 @@ Usage of bin/gzip2parts-{platformname}:
   You can build application with ``` make ```  
   You can run test with ``` make run ```
   
+  ![gzip2parts.gif](https://github.com/fatihsoydan/gzip2parts/blob/master/testContent/gzip2parts.gif?raw=true)
+  
   You can find specially usage examples of ```compress/gzip``` , ```encoding/gob``` in this project.
   
   
