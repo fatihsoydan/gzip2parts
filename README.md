@@ -17,7 +17,9 @@ Usage of bin/gzip2parts-{platformname}:
   ```
   
   You can build application with ``` make ```  
-  You can run test with ``` make run ```
+  You can run test with ``` make run ``` 
+  If you are using windows please just write ```go build```
+  
   
   ![gzip2parts.gif](testContent/gzip2parts.gif?raw=true)
   
