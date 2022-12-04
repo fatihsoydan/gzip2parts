@@ -26,6 +26,7 @@ var (
 
 func init() {
 	log.SetFlags(0)
+	log.Printf("Gzip2Parts v.%s.%s developed by Fatih Soydan [ Nuveus Limited ]\n", Version, BuildNumber)
 	var compress bool
 	var exract bool
 	var psize int
@@ -48,7 +49,6 @@ func init() {
 }
 
 func main() {
-	log.Printf("Gzip2Parts v.%s.%s developed by Fatih Soydan [ Nuveus Limited ]\n", Version, BuildNumber)
 	if _, err := os.Stat(OutputFolder); os.IsNotExist(err) {
 		os.MkdirAll(OutputFolder, os.ModePerm)
 	}
