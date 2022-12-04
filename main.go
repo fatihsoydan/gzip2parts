@@ -6,9 +6,14 @@ import (
 	"os"
 )
 
+const (
+	Version string = "1.0"
+)
+
 var (
 	Partsize      int64
-	IndexObject   []FileDescriptor
+	IndexObject   Index
+	TotalRead     int64
 	LastPartIndex int
 	LastPosition  int64
 	CurrentPart   *os.File
@@ -16,6 +21,7 @@ var (
 	OutputFolder  string
 	willCompress  bool
 	TotalFiles    int
+	BuildNumber   string
 )
 
 func init() {
@@ -42,6 +48,10 @@ func init() {
 }
 
 func main() {
+	log.Printf("Gzip2Parts v.%s.%s developed by Fatih Soydan [ Nuveus Limited ]\n", Version, BuildNumber)
+	if _, err := os.Stat(OutputFolder); os.IsNotExist(err) {
+		os.MkdirAll(OutputFolder, os.ModePerm)
+	}
 	if willCompress {
 		Compress()
 	} else {

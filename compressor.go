@@ -58,6 +58,7 @@ func addFile(fileInfo os.DirEntry, realpath string, archPath string) {
 			}
 			log.Fatal(err)
 		}
+		TotalRead += int64(n)
 		_, errw := w.Write(buf[:n])
 		if errw != nil { // maybe memory problem
 			log.Fatal(errw)
@@ -90,7 +91,7 @@ func addFile(fileInfo os.DirEntry, realpath string, archPath string) {
 			if err == io.EOF {
 				part.FinishByte = LastPosition
 				file.Parts = append(file.Parts, *part)
-				IndexObject = append(IndexObject, file)
+				IndexObject.Files = append(IndexObject.Files, file)
 				break
 			}
 			log.Fatal(err)
@@ -102,6 +103,9 @@ func addFile(fileInfo os.DirEntry, realpath string, archPath string) {
 }
 
 func writeIndex() {
+	IndexObject.Version = Version
+	IndexObject.ExtractedSize = TotalRead
+	IndexObject.PartCount = LastPartIndex
 	var b bytes.Buffer
 	enc := gob.NewEncoder(&b)
 	enc.Encode(IndexObject)
@@ -124,8 +128,7 @@ func addFolder(fullpath string, archPath string) {
 
 func Compress() {
 	starttime := time.Now()
-	IndexObject = []FileDescriptor{}
-	LastPosition, LastPartIndex, TotalFiles = 0, 0, 0
+	LastPosition, LastPartIndex, TotalFiles, TotalRead = 0, 0, 0, 0
 
 	addFolder(InputFolder, "/")
 

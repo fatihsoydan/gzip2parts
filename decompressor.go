@@ -63,7 +63,7 @@ func DeCompress() {
 	starttime := time.Now()
 	maxPartsUsed = 0
 	readIndex()
-	for _, obj := range IndexObject {
+	for _, obj := range IndexObject.Files {
 		extractFile(obj)
 	}
 

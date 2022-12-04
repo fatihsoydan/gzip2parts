@@ -11,6 +11,9 @@ TMP=/tmp
 build:
 			$(GOBUILD) $(LDFLAGS) -o bin/$(OUTPUT) -v *.go && let "BUILD_NO=$(BUILD_NO)+1" && echo $$BUILD_NO > ./.buildno
 
+buildwindows:
+			$(GOBUILD) $(LDFLAGS) -o bin/$(OUTPUT) -v *
+
 clean:
 			$(GOCLEAN)
 
